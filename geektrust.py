@@ -56,15 +56,17 @@ def main():
         if x[0] == "PRINT_BILL":
             global total
             global discount
-            # discount applied for purchase of 1000 or more
-            if total >= 1000:
-                total -= discount
-            # additional discount of 5% if total is 3000 or more
-            if total >= 3000:
-                total -= total * 5 / 100
             # reset discount if total is less than 1000
             if total < 1000:
                 discount = 0
+            # discount applied for purchase of 1000 or more
+            elif total >= 1000 and total < 3000:
+                total -= discount
+            # additional discount of 5% if total is 3000 or more
+            elif total >= 3000:
+                total -= discount
+                discount += total * 5 / 100
+                total -= total * 5 / 100
             # tax on the total bill
             total += total * 10 / 100
 
