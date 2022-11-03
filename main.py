@@ -1,5 +1,8 @@
 from sys import argv
-
+# KUMAR SHIVAM
+# ATRIA INSTITUTE OF TECHNOLOGY
+# 1AT19CS059
+# Path: main.py
 # Product	Category	Original price in Rupees	Discount for the sale
 # TSHIRT	Clothing	1000	10%
 # JACKET	Clothing	2000	5%
@@ -23,13 +26,16 @@ products = {"TSHIRT": {"category": "Clothing", "price": 1000, "discount": 10, "m
             "MARKERS": {"category": "Stationery", "price": 500, "discount": 5, "max_quantity": 3}}
 total = 0
 discount = 0
+
+
 def add(item, quantity):
     global total
     global discount
     if quantity > products[item]["max_quantity"]:
         return "ERROR_QUANTITY_EXCEEDED"
     total += products[item]["price"] * quantity
-    discount += products[item]["price"] * quantity * products[item]["discount"] / 100
+    discount += products[item]["price"] * \
+        quantity * products[item]["discount"] / 100
     return "ITEM_ADDED"
 
 
@@ -41,12 +47,12 @@ def main():
     f = open(file_path, 'r')
     lines = f.readlines()
     for line in lines:
-        output = "" #process the input command and get the output
+        output = ""  # process the input command and get the output
         # Add your code here to process input commands.
         x = line.split()
         if x[0] == "ADD_ITEM":
             output += (add(x[1], int(x[2])))
-        
+
         if x[0] == "PRINT_BILL":
             global total
             global discount
@@ -62,11 +68,11 @@ def main():
             # tax on the total bill
             total += total * 10 / 100
 
-
             output += "TOTAL_DISCOUNT " + str('%.2f' % discount) + '\n'
             output += "TOTAL_AMOUNT_TO_PAY " + str('%.2f' % total) + '\n'
         # Once it is processed print the output using the command System.out.println()
         print(output)
-    
+
+
 if __name__ == "__main__":
     main()
