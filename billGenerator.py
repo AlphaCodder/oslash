@@ -1,12 +1,15 @@
 from inventory import *
 
-def billGenerator(lines):
-    for line in lines:   
-        localInventory = inventory(0,0)
-        bill = ""
+def billGenerator(orders):
+    # initialize the inventory
+    bill = ""
+    localInventory = inventory(0,0)
 
-        if line.startswith("ADD_ITEM"):
-            action, item, quantity = line.split()
+    # process the orders
+    for order in orders:   
+
+        if order.startswith("ADD_ITEM"):
+            action, item, quantity = order.split()
             bill += localInventory.add(item, int(quantity))
 
         else:

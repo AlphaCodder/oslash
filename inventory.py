@@ -1,6 +1,6 @@
 import item
 
-
+# inventory class
 class inventory:
 
     # inventory constructor
@@ -11,12 +11,16 @@ class inventory:
 
     # add products to the inventory
     def add(self, name, quantity):
+
+        error = "ERROR_QUANTITY_EXCEEDED\n"
+        success = "ITEM_ADDED\n"
+        
         for product in self.products:
             if product.name == name:
 
                 # if quantity is greater than maximum quantity
                 if quantity > product.max_quantity:
-                    return "ERROR_QUANTITY_EXCEEDED"
+                    return error
 
                 # we can add the item to the bill and update the total and discount
                 else:
@@ -24,7 +28,7 @@ class inventory:
                     self.discount += product.price * quantity * product.discount / 100
 
                     # return the updated total and discount
-                    return "ITEM_ADDED"
+                    return success
 
     def calculateBill(self):
         # remove discount if total is less than 1000
