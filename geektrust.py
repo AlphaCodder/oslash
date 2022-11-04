@@ -12,6 +12,7 @@ def main():
     f = open(file_path, 'r')
     lines = f.readlines()
 
+    # printing the final bill
     print(billGenerator.billGenerator(lines))   
 
 if __name__ == "__main__":

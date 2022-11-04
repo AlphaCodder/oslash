@@ -11,7 +11,7 @@ def billGenerator(orders):
         if order.startswith("ADD_ITEM"):
             action, item, quantity = order.split()
             bill += localInventory.add(item, int(quantity))
-
+        
         else:
             bill += localInventory.calculateBill()
         
