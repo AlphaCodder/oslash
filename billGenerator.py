@@ -1,4 +1,5 @@
 from inventory import *
+import messeges
 
 def billGenerator(orders):
     # initialize the inventory
@@ -7,11 +8,12 @@ def billGenerator(orders):
 
     # process the orders
     for order in orders:   
+        
 
-        if order.startswith("ADD_ITEM"):
+        if order.startswith(messeges.addItem):
             action, item, quantity = order.split()
             bill += localInventory.add(item, int(quantity))
-        
+
         else:
             bill += localInventory.calculateBill()
         
