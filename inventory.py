@@ -1,12 +1,12 @@
-import item, messeges
+import item, messeges, vendor
 
 # inventory class
 class inventory:
 
     # inventory constructor
-    def __init__(self, total, discount):
-        self.total = total
-        self.discount = discount
+    def __init__(self):
+        self.total = 0
+        self.discount = 0
         self.products = item.products
 
     # add products to the inventory
