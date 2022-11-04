@@ -1,6 +1,5 @@
 from sys import argv
-import billGenerator
-import messeges
+import inventory, messeges, vendor
 
 def main():
 
@@ -13,8 +12,12 @@ def main():
     f = open(file_path, 'r')
     lines = f.readlines()
 
+    # initialize the inventory
+    localInventory = inventory.inventory(vendor.InventoryList)
+
+
     # printing the final bill
-    print(billGenerator.billGenerator(lines))   
+    print(localInventory.generateBill(lines))  
 
 if __name__ == "__main__":
     main()

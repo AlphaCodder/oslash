@@ -8,7 +8,7 @@ class inventory():
         self.total = vendor.empty
         self.discount = vendor.empty
         self.products = items.items(inventoryList).itemsList
-
+        self.bill = ""
 
     # add products to the inventory
     def add(self, name, quantity):
@@ -49,3 +49,21 @@ class inventory():
 
         # return the final amount
         return messeges.discount + str('%.2f' % self.discount) + messeges.newLine + messeges.finalAmount + str('%.2f' % self.total) + messeges.newLine
+
+    # to generate the bill
+    def generateBill(self, orders):
+            
+            # process the orders
+            for order in orders:
+    
+                if order.startswith(messeges.addItem):
+                    action, item, quantity = order.split()
+                    self.bill += self.add(item, int(quantity))
+    
+                else:
+                    self.bill += self.calculateBill()
+    
+            # return the bill
+            return self.bill
+
+
