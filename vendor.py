@@ -11,9 +11,9 @@ empty = 0
 maxDiscount = 100
 
 # tax percentage
-taxPercentage = 10
+taxPercentage = 0.10
 
 # discount percentages
 minDiscountThreshold = 1000
 extraDiscountThreshold = 3000
-extraDiscount = 5
+extraDiscount = 0.05
