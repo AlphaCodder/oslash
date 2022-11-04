@@ -1,35 +1,32 @@
 from sys import argv
-import inventory
-from inventoryFunctions import *
+from inventory import *
 
-# initialize the inventory and bill
-products = inventory.products
-total = inventory.total
-discount = inventory.discount
+# initialize the inventory
+localInventory = inventory(0,0)
 
 def main():
 
-
+    # check if the input file is provided
     if len(argv) != 2:
         raise Exception("File path not entered")
     
+    # open the input file and processing the lines
     file_path = argv[1]
     f = open(file_path, 'r')
     lines = f.readlines()
     for line in lines:
         
-        x = line.split()
         output = ""  # process the input command and get the output
         
-        global total
-        global discount
+        global localInventory
 
 
-        if x[0] == "ADD_ITEM":
-            output, total, discount = add(x[1], int(x[2]), total, discount, products)
+        if line.startswith("ADD_ITEM"):
+            action, item, quantity = line.split()
+            output = localInventory.add(item, int(quantity))
 
-        if x[0] == "PRINT_BILL":
-            output += (calculateBill(total, discount))
+        if line.startswith("PRINT_BILL"):
+            output = localInventory.calculateBill()
         
 
         # Once it is processed print the output using the command System.out.println()
