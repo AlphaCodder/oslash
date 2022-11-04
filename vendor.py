@@ -1,3 +1,4 @@
+# categories available in the inventory and max quantity of each category
 Clothing = "Clothing"
 Stationery = "Stationery"
 ClothingMaxQuantity = 2
