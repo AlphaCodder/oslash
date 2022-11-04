@@ -4,13 +4,18 @@ class item:
         self.category = category
         self.price = price
         self.discount = discount
+        self.setMaxQuantity()
+
+    def setMaxQuantity(self):
         if self.category is Clothing:
             self.max_quantity = 2
         elif self.category is Stationery:
             self.max_quantity = 3
 
+
 Clothing = "Clothing"
 Stationery = "Stationery"
+
 
 tshirt = item("TSHIRT", Clothing, 1000, 10)
 jacket = item("JACKET", Clothing, 2000, 5)
