@@ -1,13 +1,14 @@
-import item, messeges, vendor
+import items, messeges, vendor
 
 # inventory class
-class inventory:
+class inventory():
 
     # inventory constructor
-    def __init__(self):
+    def __init__(self, inventoryList):
         self.total = vendor.empty
         self.discount = vendor.empty
-        self.products = item.products
+        self.products = items.items(inventoryList).itemsList
+
 
     # add products to the inventory
     def add(self, name, quantity):
@@ -27,6 +28,7 @@ class inventory:
                     # return the updated total and discount
                     return messeges.success
 
+    # calculate the bill to be paid
     def calculateBill(self):
 
         # remove discount if total is less than minDiscountThreshold

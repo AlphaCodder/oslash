@@ -4,7 +4,7 @@ import messeges
 def billGenerator(orders):
     # initialize the inventory
     bill = ""
-    localInventory = inventory()
+    localInventory = inventory(vendor.InventoryList)
 
     # process the orders
     for order in orders:   
