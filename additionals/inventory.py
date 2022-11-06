@@ -1,4 +1,29 @@
-from additionals import items, messeges, vendor
+from additionals import vendor
+
+# inventory messeges
+filePathError = "File path not entered"
+addItem = "ADD_ITEM"
+error = "ERROR_QUANTITY_EXCEEDED\n"
+success = "ITEM_ADDED\n"
+discount = "TOTAL_DISCOUNT "
+finalAmount = "TOTAL_AMOUNT_TO_PAY "
+newLine = "\n"
+
+# class for item
+class item:
+
+    def __init__(self, name, category, price, discount):
+        self.name = name
+        self.category = category
+        self.price = price
+        self.discount = discount
+        self.max_quantity = vendor.ClothingMaxQuantity if category == vendor.Clothing else vendor.StationeryMaxQuantity
+    
+    @classmethod
+    def fromString(cls, string):
+        name, category, price, discount = string.split()
+        return cls(name, category, int(price), int(discount))
+
 
 # inventory class
 class inventory():
@@ -7,8 +32,15 @@ class inventory():
     def __init__(self, inventoryList):
         self.total = vendor.empty
         self.discount = vendor.empty
-        self.products = items.items(inventoryList).itemsList
         self.bill = ""
+        self.setProducts(inventoryList)
+        
+    # to add the products to the inventory
+    def setProducts(self, inventoryList):
+        self.products = []
+        inventoryList = inventoryList.split(newLine)
+        for object in inventoryList:
+            self.products.append(item.fromString(object))
 
     # add products to the inventory
     def add(self, name, quantity):
@@ -18,7 +50,7 @@ class inventory():
 
                 # if quantity is greater than maximum quantity
                 if quantity > product.max_quantity:
-                    return messeges.error
+                    return error
 
                 # we can add the item to the bill and update the total and discount
                 else:
@@ -26,7 +58,7 @@ class inventory():
                     self.discount += product.price * quantity * product.discount / vendor.maxDiscount
 
                     # return the updated total and discount
-                    return messeges.success
+                    return success
 
     # calculate the bill to be paid
     def calculateBill(self):
@@ -48,7 +80,7 @@ class inventory():
         self.total += self.total * vendor.taxPercentage
 
         # return the final amount
-        return messeges.discount + str('%.2f' % self.discount) + messeges.newLine + messeges.finalAmount + str('%.2f' % self.total) + messeges.newLine
+        return discount + str('%.2f' % self.discount) + newLine + finalAmount + str('%.2f' % self.total) + newLine
 
     # to generate the bill
     def generateBill(self, orders):
@@ -56,7 +88,7 @@ class inventory():
             # process the orders
             for order in orders:
     
-                if order.startswith(messeges.addItem):
+                if order.startswith(addItem):
                     action, item, quantity = order.split()
                     self.bill += self.add(item, int(quantity))
     
