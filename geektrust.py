@@ -25,7 +25,7 @@ def main():
 
 
     # printing the final bill
-    print(localInventory.generateBill(lines))  
+    print(localInventory.getBill(lines))  
 
 if __name__ == system.main:
     main()

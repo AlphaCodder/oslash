@@ -19,23 +19,16 @@ class item:
 
 # inventory class
 class inventory():
-
-    # inventory constructor
-    def __init__(self, inventoryList):
-        self.total = vendor.empty
-        self.discount = vendor.empty
-        self.bill = ""
-        self.setProducts(inventoryList)
         
     # to add the products to the inventory
-    def setProducts(self, inventoryList):
+    def __setProducts(self, inventoryList):
         self.products = []
         inventoryList = inventoryList.split(vendor.newLine)
         for object in inventoryList:
             self.products.append(item.fromString(object))
 
     # add products to the inventory
-    def add(self, name, quantity):
+    def __addProducts(self, name, quantity):
 
         for product in self.products:
             if product.name == name:
@@ -53,7 +46,7 @@ class inventory():
                     return vendor.success
 
     # calculate the bill to be paid
-    def setTotalAndDiscount(self):
+    def __setTotalAndDiscount(self):
 
         # remove discount if total is less than minDiscountThreshold
         if self.total >= vendor.minDiscountThreshold:
@@ -74,21 +67,35 @@ class inventory():
 
 
     # to generate the bill
-    def generateBill(self, orders):
+    def __generateBill(self, orders):
             
             # process the orders
             for order in orders:
     
                 if order.startswith(vendor.addItem):
                     action, item, quantity = order.split()
-                    self.bill += self.add(item, int(quantity))
+                    self.bill += self.__addProducts(item, int(quantity))
     
                 else:
-                    self.setTotalAndDiscount()
+                    self.__setTotalAndDiscount()
                     self.bill += vendor.billFormatter(self.discount, self.total)
                     
     
-            # return the bill
-            return self.bill
+    # return the bill
+    def getBill(self, orders):
+        
+        # generate the bill
+        self.__generateBill(orders)
+        
+        return self.bill
+
+
+    
+    # inventory constructor
+    def __init__(self, inventoryList):
+        self.total = vendor.empty
+        self.discount = vendor.empty
+        self.bill = ""
+        self.__setProducts(inventoryList)
 
 
