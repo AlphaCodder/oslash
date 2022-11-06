@@ -22,9 +22,9 @@ class inventory():
     
     # inventory constructor
     def __init__(self, inventoryList):
-        self.total = vendor.empty
-        self.discount = vendor.empty
-        self.bill = ""
+        self.__total = vendor.empty
+        self.__discount = vendor.empty
+        self.__bill = ""
         self.__setProducts(inventoryList)
         
     # to add the products to the inventory
@@ -46,8 +46,8 @@ class inventory():
 
                 # we can add the item to the bill and update the total and discount
                 else:
-                    self.total += product.price * quantity
-                    self.discount += product.price * quantity * product.discount / vendor.maxDiscount
+                    self.__total += product.price * quantity
+                    self.__discount += product.price * quantity * product.discount / vendor.maxDiscount
 
                     # return the updated total and discount
                     return vendor.success
@@ -56,20 +56,20 @@ class inventory():
     def __setTotalAndDiscount(self):
 
         # remove discount if total is less than minDiscountThreshold
-        if self.total >= vendor.minDiscountThreshold:
-            self.total -= self.discount
+        if self.__total >= vendor.minDiscountThreshold:
+            self.__total -= self.__discount
 
         # discount applied for purchase of vendor.minDiscountThreshold or more
         else:
-            self.discount = vendor.empty
+            self.__discount = vendor.empty
 
         # if total is greater than vendor.extraDiscountThreshold, extra vendor.extraDiscount% discount is applied
-        if self.total >= vendor.extraDiscountThreshold:
-            self.discount += self.total * vendor.extraDiscount
-            self.total -= self.total * vendor.extraDiscount
+        if self.__total >= vendor.extraDiscountThreshold:
+            self.__discount += self.__total * vendor.extraDiscount
+            self.__total -= self.__total * vendor.extraDiscount
 
         # tax on the total bill
-        self.total += self.total * vendor.taxPercentage
+        self.__total += self.__total * vendor.taxPercentage
 
 
 
@@ -81,11 +81,11 @@ class inventory():
     
                 if order.startswith(vendor.addItem):
                     action, item, quantity = order.split()
-                    self.bill += self.__addProducts(item, int(quantity))
+                    self.__bill += self.__addProducts(item, int(quantity))
     
                 else:
                     self.__setTotalAndDiscount()
-                    self.bill += vendor.billFormatter(self.discount, self.total)
+                    self.__bill += vendor.billFormatter(self.__discount, self.__total)
                     
     
     # return the bill
@@ -94,7 +94,7 @@ class inventory():
         # generate the bill
         self.__generateBill(orders)
         
-        return self.bill
+        return self.__bill
 
 
 
