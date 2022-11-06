@@ -5,16 +5,31 @@ from additionals import vendor
 class item:
 
     def __init__(self, name, category, price, discount):
-        self.name = name
-        self.category = category
-        self.price = price
-        self.discount = discount
-        self.max_quantity = vendor.ClothingMaxQuantity if category == vendor.Clothing else vendor.StationeryMaxQuantity
+        self.__name = name
+        self.__category = category
+        self.__price = price
+        self.__discount = discount
+        self.__max_quantity = vendor.ClothingMaxQuantity if category == vendor.Clothing else vendor.StationeryMaxQuantity
     
     @classmethod
     def fromString(cls, string):
-        name, category, price, discount = string.split()
-        return cls(name, category, int(price), int(discount))
+        __name, __category, __price, __discount = string.split()
+        return cls(__name, __category, int(__price), int(__discount))
+    
+    def getName(self):
+        return self.__name
+    
+    def getCategory(self):
+        return self.__category
+    
+    def getPrice(self):
+        return self.__price
+    
+    def getDiscount(self):
+        return self.__discount
+    
+    def getMaxQuantity(self):
+        return self.__max_quantity
 
 
 # inventory class
@@ -25,29 +40,30 @@ class inventory():
         self.__total = vendor.empty
         self.__discount = vendor.empty
         self.__bill = ""
+        self.__products = []
         self.__setProducts(inventoryList)
         
     # to add the products to the inventory
     def __setProducts(self, inventoryList):
-        self.products = []
         inventoryList = inventoryList.split(vendor.newLine)
         for object in inventoryList:
-            self.products.append(item.fromString(object))
+            self.__products.append(item.fromString(object))
 
     # add products to the inventory
     def __addProducts(self, name, quantity):
 
-        for product in self.products:
-            if product.name == name:
+        for product in self.__products:
+            
+            if product.getName() == name:
 
                 # if quantity is greater than maximum quantity
-                if quantity > product.max_quantity:
+                if quantity > product.getMaxQuantity():
                     return vendor.error
 
                 # we can add the item to the bill and update the total and discount
                 else:
-                    self.__total += product.price * quantity
-                    self.__discount += product.price * quantity * product.discount / vendor.maxDiscount
+                    self.__total += product.getPrice() * quantity
+                    self.__discount += product.getPrice() * quantity * product.getDiscount() / vendor.maxDiscount
 
                     # return the updated total and discount
                     return vendor.success
