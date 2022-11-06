@@ -19,6 +19,13 @@ class item:
 
 # inventory class
 class inventory():
+    
+    # inventory constructor
+    def __init__(self, inventoryList):
+        self.total = vendor.empty
+        self.discount = vendor.empty
+        self.bill = ""
+        self.__setProducts(inventoryList)
         
     # to add the products to the inventory
     def __setProducts(self, inventoryList):
@@ -89,13 +96,5 @@ class inventory():
         
         return self.bill
 
-
-    
-    # inventory constructor
-    def __init__(self, inventoryList):
-        self.total = vendor.empty
-        self.discount = vendor.empty
-        self.bill = ""
-        self.__setProducts(inventoryList)
 
 
