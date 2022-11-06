@@ -82,7 +82,7 @@ class inventory():
             # process the orders
             for order in orders:
     
-                if order.startswith(addItem):
+                if order.startswith(vendor.addItem):
                     action, item, quantity = order.split()
                     self.bill += self.add(item, int(quantity))
     
