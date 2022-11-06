@@ -1,12 +1,5 @@
 from additionals import vendor
 
-# inventory messeges
-addItem = "ADD_ITEM"
-error = "ERROR_QUANTITY_EXCEEDED\n"
-success = "ITEM_ADDED\n"
-discount = "TOTAL_DISCOUNT "
-finalAmount = "TOTAL_AMOUNT_TO_PAY "
-newLine = "\n"
 
 # class for item
 class item:
@@ -37,7 +30,7 @@ class inventory():
     # to add the products to the inventory
     def setProducts(self, inventoryList):
         self.products = []
-        inventoryList = inventoryList.split(newLine)
+        inventoryList = inventoryList.split(vendor.newLine)
         for object in inventoryList:
             self.products.append(item.fromString(object))
 
@@ -49,7 +42,7 @@ class inventory():
 
                 # if quantity is greater than maximum quantity
                 if quantity > product.max_quantity:
-                    return error
+                    return vendor.error
 
                 # we can add the item to the bill and update the total and discount
                 else:
@@ -57,7 +50,7 @@ class inventory():
                     self.discount += product.price * quantity * product.discount / vendor.maxDiscount
 
                     # return the updated total and discount
-                    return success
+                    return vendor.success
 
     # calculate the bill to be paid
     def calculateBill(self):
@@ -79,7 +72,9 @@ class inventory():
         self.total += self.total * vendor.taxPercentage
 
         # return the final amount
-        return discount + str('%.2f' % self.discount) + newLine + finalAmount + str('%.2f' % self.total) + newLine
+        bill = vendor.discount + str('%.2f' % self.discount) + vendor.newLine
+        bill += vendor.finalAmount + str('%.2f' % self.total) + vendor.newLine
+        return bill
 
     # to generate the bill
     def generateBill(self, orders):

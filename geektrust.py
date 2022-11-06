@@ -1,13 +1,12 @@
 from sys import argv
 from additionals import vendor, inventory
 
-filePathError = "File path not entered"
 
 
 def parseArgs():
     # check if the input file is provided
     if len(argv) != 2:
-        raise Exception(filePathError)
+        raise Exception(vendor.filePathError)
     
     # open the input file and processing the lines
     file_path = argv[1]

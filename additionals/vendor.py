@@ -18,3 +18,13 @@ taxPercentage = 0.10
 minDiscountThreshold = 1000
 extraDiscountThreshold = 3000
 extraDiscount = 0.05
+
+# inventory messeges
+addItem = "ADD_ITEM"
+error = "ERROR_QUANTITY_EXCEEDED\n"
+success = "ITEM_ADDED\n"
+discount = "TOTAL_DISCOUNT "
+finalAmount = "TOTAL_AMOUNT_TO_PAY "
+newLine = "\n"
+
+filePathError = "File path not entered"
