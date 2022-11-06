@@ -23,7 +23,14 @@ extraDiscount = 0.05
 addItem = "ADD_ITEM"
 error = "ERROR_QUANTITY_EXCEEDED\n"
 success = "ITEM_ADDED\n"
-discount = "TOTAL_DISCOUNT "
-finalAmount = "TOTAL_AMOUNT_TO_PAY "
+discountText = "TOTAL_DISCOUNT "
+finalAmountText = "TOTAL_AMOUNT_TO_PAY "
 newLine = "\n"
 formatSpecifier = '%.2f'
+
+
+# return the final amount
+def billFormatter(discount, total):
+    bill = discountText + str(formatSpecifier % discount) + newLine
+    bill += finalAmountText + str(formatSpecifier % total) + newLine
+    return bill

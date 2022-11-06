@@ -53,7 +53,7 @@ class inventory():
                     return vendor.success
 
     # calculate the bill to be paid
-    def calculateBill(self):
+    def setTotalAndDiscount(self):
 
         # remove discount if total is less than minDiscountThreshold
         if self.total >= vendor.minDiscountThreshold:
@@ -71,10 +71,7 @@ class inventory():
         # tax on the total bill
         self.total += self.total * vendor.taxPercentage
 
-        # return the final amount
-        bill = vendor.discount + str(vendor.formatSpecifier % self.discount) + vendor.newLine
-        bill += vendor.finalAmount + str(vendor.formatSpecifier % self.total) + vendor.newLine
-        return bill
+
 
     # to generate the bill
     def generateBill(self, orders):
@@ -87,7 +84,9 @@ class inventory():
                     self.bill += self.add(item, int(quantity))
     
                 else:
-                    self.bill += self.calculateBill()
+                    self.setTotalAndDiscount()
+                    self.bill += vendor.billFormatter(self.discount, self.total)
+                    
     
             # return the bill
             return self.bill
