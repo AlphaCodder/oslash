@@ -1,4 +1,4 @@
-import vendor, messeges
+from additionals import vendor, messeges
 
 # class for item
 class item:

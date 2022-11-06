@@ -1,5 +1,5 @@
 from sys import argv
-import inventory, messeges, vendor
+from additionals import messeges, vendor, inventory
 
 def main():
 

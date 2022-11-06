@@ -1,4 +1,4 @@
-import items, messeges, vendor
+from additionals import items, messeges, vendor
 
 # inventory class
 class inventory():
