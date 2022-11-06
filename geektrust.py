@@ -1,17 +1,16 @@
 from sys import argv
-from additionals import vendor, inventory
+from additionals import vendor, inventory, system
 
 
 
 def parseArgs():
     # check if the input file is provided
-    if len(argv) != 2:
-        raise Exception(vendor.filePathError)
+    if len(argv) != system.maxArgs:
+        raise Exception(system.filePathError)
     
     # open the input file and processing the lines
-    file_path = argv[1]
-    f = open(file_path, 'r')
-    lines = f.readlines()
+    file_path = argv[system.filePath]
+    lines = open(file_path, system.readOnly).readlines()
 
     return lines
 
@@ -28,5 +27,5 @@ def main():
     # printing the final bill
     print(localInventory.generateBill(lines))  
 
-if __name__ == "__main__":
+if __name__ == system.main:
     main()

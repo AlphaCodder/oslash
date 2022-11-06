@@ -72,8 +72,8 @@ class inventory():
         self.total += self.total * vendor.taxPercentage
 
         # return the final amount
-        bill = vendor.discount + str('%.2f' % self.discount) + vendor.newLine
-        bill += vendor.finalAmount + str('%.2f' % self.total) + vendor.newLine
+        bill = vendor.discount + str(vendor.formatSpecifier % self.discount) + vendor.newLine
+        bill += vendor.finalAmount + str(vendor.formatSpecifier % self.total) + vendor.newLine
         return bill
 
     # to generate the bill

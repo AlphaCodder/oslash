@@ -187,4 +187,7 @@ cython_debug/
 pyvenv.cfg
 pip-selfcheck.json
 
+# compressed files
+*.zip
+
 # End of https://www.toptal.com/developers/gitignore/api/python,virtualenv,jupyternotebooks

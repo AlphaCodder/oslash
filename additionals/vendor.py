@@ -26,5 +26,4 @@ success = "ITEM_ADDED\n"
 discount = "TOTAL_DISCOUNT "
 finalAmount = "TOTAL_AMOUNT_TO_PAY "
 newLine = "\n"
-
-filePathError = "File path not entered"
+formatSpecifier = '%.2f'
